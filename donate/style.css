@@ -31,15 +31,17 @@ height: auto;
 }
 
 body {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: rgba(22, 22, 22, 1);
 }
 
 .nav {
-  width: 80%;
+  width: 100%;
   position: absolute;
   top: 0;
   height: 60px;
@@ -50,12 +52,27 @@ body {
 
 .back {
   position: absolute;
-  left: 0;
-  width: 60px;
-  height: 90%;
+  left: 5px;
+  width: 70px;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.back-a {
+  height: 100%;
+  width: 100%;
+}
+
+.btn-back {
+  height: 100%;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: #0088cc;
 }
 
 .balance {
@@ -67,6 +84,7 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 21px;
+  color: #ffffff;
 }
 
 .balance::before {
@@ -76,7 +94,9 @@ body {
 }
 
 .increase {
-  border: 1px solid #000;
+  background: #212124 ;
+  border-radius: 10px;
+  color: white;
   width: 200px;
   height: 100px;
   margin: 10px;

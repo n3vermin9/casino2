@@ -22,31 +22,49 @@ height: auto;
 }
 
 body {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: rgba(22, 22, 22, 1);
 }
 
 .nav {
-  width: 80%;
+  width: 100%;
   position: absolute;
   top: 0;
   height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-right: 10px;
 }
 
 .back {
   position: absolute;
-  left: 0;
-  width: 60px;
-  height: 90%;
+  left: 5px;
+  width: 70px;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.back-a {
+  height: 100%;
+  width: 100%;
+}
+
+.btn-back {
+  height: 100%;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: #0088cc;
 }
 
 .balance {
@@ -58,6 +76,7 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 21px;
+  color: #ffffff;
 }
 
 .balance::before {
@@ -69,7 +88,7 @@ body {
 .wheel {
   border-radius: 50%;
   transition: transform 3s ease;
-  /* transform: rotate(-256deg); */
+  /* transform: rotate(-286deg); */
 }
 
 .wheel-container {
@@ -103,7 +122,6 @@ body {
   margin: 0;
   z-index: -1;
   opacity: 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   background: rgba(14, 14, 14, 0.3);
   backdrop-filter: blur(5px); 
   transition: all 1s ease;
@@ -119,7 +137,7 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   background: #333;
   border: 1px solid #ffffff20;
-  border-radius: 30px;
+  border-radius: 20px;
   opacity: 1;
   pointer-events: none;
   transition: opacity 1s ease;
@@ -141,6 +159,7 @@ body {
 }
 
 .container {
+  /* border: 1px solid #000; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -164,19 +183,67 @@ body {
 .bet-container * {
   width: 90%;
   height: 50px;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .input {
   border: none;
   border-bottom: 1px solid #000;
-  background: #00000020;
+  background: #212124;
   outline: none;
   padding: 20px;
+  color: white;
+  border-radius: 6px;
 }
 
 .rotate {
   border: none;
-  background: greenyellow;
+  background: #0088cc;
+  color: white;
   cursor: pointer;
+  border-radius: 6px;
+}
+
+@media (min-width:320px)  {
+  .wheel-container {
+    width: 250px;
+    height: 250px;
+  }
+  .triangle-down {
+    border-top: 60px solid #FCC737;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+  .modal {
+    width: 240px;
+    height: 150px;
+  }
+}
+@media (min-width:481px)  {
+  .wheel-container {
+    width: 350px;
+    height: 350px;
+  }
+  .triangle-down {
+    border-top: 60px solid #FCC737;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+}
+@media (min-width:641px)  {
+}
+@media (min-width:961px)  {
+  .nav {
+    width: 70%;
+  }
+}
+@media (min-width:1025px) {
+  .nav {
+    width: 80%;
+  }
+}
+@media (min-width:1281px) {
+  .nav {
+    width: 90%;
+  }
 }

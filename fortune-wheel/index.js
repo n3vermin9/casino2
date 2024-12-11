@@ -50,10 +50,10 @@ btnRotate.addEventListener('click', () => {
                   balance.innerText = localStorage.getItem('balance')
                     break;
 
-                case (current <= -46 && current >= -75):
+                case (current <= -46 && current >= -75 || current <= -226 && current >= -255):
                     modal.innerText = `you won $${input.value * 2}`
                     localStorage.setItem('balance', parseInt(balanceValue) + parseInt(input.value));
-                    localStorage.setItem('balance', input.value * 2 + parseInt(balanceValue));
+                    localStorage.setItem('balance', input.value * 1 + parseInt(balanceValue));
                     balance.innerText = localStorage.getItem('balance')
                     break;
                     
@@ -71,7 +71,7 @@ btnRotate.addEventListener('click', () => {
                     balance.innerText = localStorage.getItem('balance')
                     break;
 
-                case (current <= -226 && current >= -255 || current <= -165 && current >= -195):
+                case (current <= -286 && current >= -315):
                     modal.innerText = `you won $${input.value * 3}`
                     localStorage.setItem('balance', parseInt(balanceValue) + parseInt(input.value));
                     localStorage.setItem('balance', input.value * 2 + parseInt(balanceValue));
