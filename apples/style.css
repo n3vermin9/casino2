@@ -8,6 +8,15 @@ height: 100vh;
 box-sizing: inherit;
 font-family: 'Poppins', sans-serif;
 font-weight: 400;
+box-sizing: inherit;
+-webkit-tap-highlight-color: transparent;
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+outline: none !important;
 }
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
 margin: 0;
@@ -21,28 +30,154 @@ max-width: 100%;
 height: auto;
 }
 
-.container {
+body {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgba(22, 22, 22, 1);
+}
+
+.nav {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.back {
+  position: absolute;
+  left: 5px;
+  width: 70px;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.appleGuess {
-  width: 70px;
-  height: 70px;
+.back-a {
+  height: 100%;
+  width: 100%;
 }
 
-.game-screen {
+.btn-back {
+  height: 100%;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: #0088cc;
+}
+
+.balance {
+  width: 90px;
+  height: 90%;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  color: #ffffff;
+}
+
+.balance::before {
+  content: '$';
+  position: absolute;
+  left: 0;
+}
+
+.input {
+  border: none;
+  border-bottom: 1px solid #000;
+  background: #212124;
+  outline: none;
+  padding: 20px;
+  color: white;
+  border-radius: 6px;
+}
+
+.rotate {
+  border: none;
+  background: #0088cc;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  height: 700px;
+  position: relative;
+}
+
+.apples-container {
+  width: 75%;
+  flex: 3;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+
+.btns-apple {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  bottom: 0px;
+}
+
+.btn-apple {
+  width: 80px;
+  height: 80px;
+  border: none;
+  border-radius: 10px;
+}
+
+.grid-1 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border: 1px solid #000;
-  width: 330px;
-  gap: 10px;
-  padding: 10px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
-.noBtn {
-  width: 70px;
-  height: 70px;
+.grid-item {
   border: 1px solid #000;
+  height: 80px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.bet-container {
+  flex: 1;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bet-container * {
+  width: 90%;
+  height: 50px;
+  font-size: 22px;
 }

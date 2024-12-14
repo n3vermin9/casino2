@@ -1,86 +1,72 @@
 const balance = document.querySelector('.balance');
-const gameScreen = document.querySelector('.game-screen');
+
+const modal = document.querySelector('.modal');
+const blurredBg = document.querySelector('.blurred-bg');
+
+const rotate = document.querySelector('.rotate');
+const input = document.querySelector('.input');
+
+const btnsApple = document.querySelector('.btns-apple');
+const btnApple = document.querySelectorAll('.btn-apple')
+
+const gridItem = document.querySelectorAll('.grid-item')
+
 
 let balanceValue = localStorage.getItem('balance')
 
 window.onload = function() {
+    input.value = ''
   if (!balanceValue || balanceValue === null || balanceValue === NaN) {
-    localStorage.setItem('balance', 10)
-  }
+    localStorage.setItem('balance', 0)
+    balance.innerText = balanceValue
+} else {
+    balance.innerText = balanceValue
+}
 };
 
 balance.innerText = balanceValue
 
-let btnsArr = [
-  [],
-  [],
-  [],
-  [],
-  [1],
-]
+let btnPosition = 80
+
+let currentPos = 20
 
 
-function createBtn(num) {
-  let appleBtn = document.createElement('button')
-  appleBtn.classList.add('appleGuess')
-  appleBtn.classList.add(`appleBtn${num}`)
-  gameScreen.appendChild(appleBtn)
-}
-
-function createNoBtn() {
-  let noBtn = document.createElement('div')
-  noBtn.classList.add('noBtn')
-  noBtn.classList.add(`noBtn`)
-  gameScreen.appendChild(noBtn)
-}
-
-for (let i = 0; i < btnsArr.length; i++) {
-  if (btnsArr[i].length == 0) {
-    createNoBtn()
-    createNoBtn()
-    createNoBtn()
-    createNoBtn()
-  }
-  else {
-    for (let j = 0; j < 4; j++) {
-      createBtn(j)
-    }
-  }
-}
-
-const appleGuess = document.querySelectorAll('.appleGuess')
-
-const appleBtn0 = document.querySelector('.appleBtn0');
-const appleBtn1 = document.querySelector('.appleBtn1');
-const appleBtn2 = document.querySelector('.appleBtn2');
-const appleBtn3 = document.querySelector('.appleBtn3');
-
-let currentRow = 0
-
-let appleImg = document.createElement('img')
-appleImg.src = 'apples/png/apple.png'
-
-gameScreen.addEventListener('click', (event) => {
-  if (event.target.classList.contains('appleGuess')) {
-    gameScreen.innerHTML = '';
-    btnsArr.shift();
-    btnsArr.push([]);
-    renderButtons();
-    gameScreen.children[currentRow].appendChild(appleImg)
-    currentRow++
-  }
-});
-function renderButtons() {
-  for (let i = 0; i < btnsArr.length; i++) {
-    if (btnsArr[i].length == 0) {
-      createNoBtn();
-      createNoBtn();
-      createNoBtn();
-      createNoBtn();
-    } else {
-      for (let j = 0; j < 4; j++) {
-        createBtn(j);
+btnApple.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (currentPos >= 0) {
+      if (currentPos == 0) {
+        btnApple.forEach(btnHide => {
+          btnHide.style.display = 'none';
+        });
       }
+      let chances = Math.floor(Math.random() * 100)
+      console.log(chances);
+      let pressedBtnId = parseInt(btn.classList[1].slice(3, 4));
+      btnsApple.style.bottom = `${btnPosition}px`;
+      btnPosition += 80;
+      let classesToCheck = [`item${currentPos}`, `item${currentPos + 1}`, `item${currentPos + 2}`, `item${currentPos + 3}`];
+      currentPos -= 4;
+      gridItem.forEach(item => {
+        if (classesToCheck.some(className => item.classList.contains(className))) {
+
+          if (chances > 50) {
+            let newApplePng = document.createElement('img');
+            newApplePng.src = '/png/apple.png';
+            newApplePng.alt = '2';
+  
+            if (item.classList.contains(classesToCheck[pressedBtnId])) {
+              item.appendChild(newApplePng);
+            }
+          } else {
+            let newBadApplePng = document.createElement('img');
+            newBadApplePng.src = '/png/bitten-apple.png';
+            newBadApplePng.alt = '2';
+  
+            if (item.classList.contains(classesToCheck[pressedBtnId])) {
+              item.appendChild(newBadApplePng);
+          }
+        }
+      }});
     }
-  }
-}
+  });
+});

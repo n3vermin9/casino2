@@ -25,9 +25,10 @@ balance.innerText = balanceValue
 
 let isStarted = false
 
-btnRotate.addEventListener('click', () => {
+btnRotate.addEventListener('click', (event) => {
     if (input.value > 0 && !isStarted && parseInt(balance.innerText) >= input.value) {
         isStarted = true
+        input.style.visibility = 'hidden'
         let current = Math.floor(Math.random() * -345)
         current -= 720
         wheel.style.transform = `rotate(${current}deg)`;
@@ -84,6 +85,7 @@ btnRotate.addEventListener('click', () => {
                     break; 
             }
           wheel.style.transform = `rotate(${0}deg)`;
+          input.style.visibility = 'visible'
       }, 4000);
     }
 })
