@@ -104,12 +104,13 @@ body {
   border-radius: 6px;
 }
 
-.rotate {
+.take {
   border: none;
   background: #0088cc;
   color: white;
   cursor: pointer;
   border-radius: 6px;
+  display: none;
 }
 
 .container {
@@ -119,6 +120,7 @@ body {
   flex-direction: column;
   gap: 20px;
   height: 700px;
+  width: 449px;
   position: relative;
 }
 
@@ -139,6 +141,7 @@ body {
   align-items: center;
   position: absolute;
   bottom: 0px;
+  transition: bottom .3s ease;
 }
 
 .btn-apple {
@@ -146,6 +149,10 @@ body {
   height: 80px;
   border: none;
   border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(44, 44, 44, 0.5);
+  border: 1px solid #ffffff20;
+  cursor: pointer;
 }
 
 .grid-1 {
@@ -157,7 +164,9 @@ body {
 }
 
 .grid-item {
-  border: 1px solid #000;
+  border: 1px solid #00000040;
+  background: #ffffff02;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   height: 80px;
   color: white;
   display: flex;
@@ -180,4 +189,50 @@ body {
   width: 90%;
   height: 50px;
   font-size: 22px;
+}
+
+.blurred-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0;
+  z-index: -1;
+  opacity: 0;
+  background: rgba(14, 14, 14, 0.3);
+  backdrop-filter: blur(5px); 
+  transition: all 1s ease;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: #333;
+  border: 1px solid #ffffff20;
+  border-radius: 20px;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 1s ease;
+  font-size: 25px;
+  color: white;
+}
+
+.modal.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 1s ease;
+}
+
+.blurred-bg.is-active {
+  z-index: 2;
+  opacity: 1;
+  display: flex;
+  transition: all 1s ease;
 }
