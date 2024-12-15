@@ -143,6 +143,16 @@ span {
   margin: 10px 0 10px 0;
 }
 
+.game > img {
+  width: 120px;
+  position: absolute;
+  left: 14%;
+}
+
+.game-fortune-wheel > img {
+  border-radius: 50%;
+}
+
 .btn-game {
   position: absolute;
   right: 0;
@@ -154,4 +164,5 @@ span {
   color: white;
   font-size: 16px;
   cursor: pointer;
+  font-weight: 500;
 }

@@ -30,6 +30,10 @@ max-width: 100%;
 height: auto;
 }
 
+html {
+  overflow: hidden;
+}
+
 body {
   overflow: hidden;
   display: flex;
@@ -187,8 +191,8 @@ body {
 
 .bet-container * {
   width: 90%;
-  height: 50px;
-  font-size: 22px;
+  height: 70px;
+  font-size: 26px;
 }
 
 .blurred-bg {
@@ -212,7 +216,7 @@ body {
   align-items: center;
   position: absolute;
   width: 300px;
-  height: 200px;
+  height: 150px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   background: #333;
   border: 1px solid #ffffff20;
@@ -235,4 +239,56 @@ body {
   opacity: 1;
   display: flex;
   transition: all 1s ease;
+}
+
+.grid-item::before {
+  color: white;
+  opacity: var(--before-opacity, .2);
+  position: absolute;
+}
+
+.item0::before {
+  content: 'x13';
+  left: -25px;
+}
+
+.item4::before {
+  content: 'x6';
+  left: -21px;
+}
+
+.item8::before {
+  content: 'x3.5';
+  left: -34px;
+}
+
+.item12::before {
+  content: 'x2.1';
+  left: -28px;
+}
+
+.item16::before {
+  content: 'x1.6';
+  left: -29px;
+}
+
+.item20::before {
+  content: 'x1.2';
+  left: -28px;
+}
+
+.possible-win {
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 20px;
+  opacity: 0;
+}
+
+.possible-win::before {
+  content: '$';
+  font-size: 20px;
+  color: white;
+  padding-right: 5px;
 }

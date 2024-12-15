@@ -1,5 +1,7 @@
 const balance = document.querySelector('.balance');
 
+const possibleWin = document.querySelector('.possible-win')
+
 const modal = document.querySelector('.modal');
 const blurredBg = document.querySelector('.blurred-bg');
 
@@ -10,6 +12,7 @@ const btnsApple = document.querySelector('.btns-apple');
 const btnApple = document.querySelectorAll('.btn-apple')
 
 const gridItem = document.querySelectorAll('.grid-item')
+
 
 
 let balanceValue = localStorage.getItem('balance')
@@ -26,50 +29,82 @@ window.onload = function() {
 
 balance.innerText = balanceValue
 
+let isStarted = false
+
 let btnPosition = 80
 
 let currentPos = 20
 
+let coefficients = [1.2, 1.6, 2.1, 3.5, 6, 13]
+let coefficientsStep = 0
+
+gridItem.forEach(item => item.style.setProperty('--before-opacity', '.2'))
+
 function resetGame() {
-  currentPos = 20; // Reset current position
-  btnPosition = 80; // Reset button position
-  // Clear the grid items, you can use a loop here
+  currentPos = 20;
+  btnPosition = 80;
+
   gridItem.forEach(item => item.innerHTML = '');
   take.style.display = 'none';
-  btnApple.forEach(btn => btn.style.display = 'block'); // Show buttons again
+  btnApple.forEach(btn => btn.style.display = 'block');
   btnsApple.style.bottom = '0px'
-  input.style.display = 'block'; // Show input
+  input.style.display = 'block';
+  isStarted = false
+
+  coefficientsStep = 0
+  possibleWin.style.opacity = 0
+  possibleWin.innerText = `0`
 }
 
-// Call this function when necessary, for instance, on losing a game
+function handleModal(result) {
+  modal.innerText = result
+  modal.classList.add('is-active');
+  blurredBg.classList.add('is-active');
+  setTimeout(() => {
+    modal.classList.remove('is-active');
+    blurredBg.classList.remove('is-active');
+
+    resetGame()
+  }, 3000);
+}
 
 
 btnApple.forEach(btn => {
   btn.addEventListener('click', () => {
-    if (currentPos >= 0) {
-
+    if (currentPos >= 0 && input.value > 0) {
       if (currentPos == 0) {
         btnApple.forEach(btnHide => {
           btnHide.style.display = 'none';
+          handleModal(`You won $${input.value * coefficients[coefficientsStep]}`)
         });
       }
 
-      if (currentPos < 20) {
-        take.style.display = 'block'
+      if (!isStarted) {
+        balanceValue = localStorage.getItem('balance')
+        localStorage.setItem('balance', parseInt(balanceValue) - parseInt(input.value));
+        balance.innerText = localStorage.getItem('balance')
       }
+
+      isStarted = true
+      possibleWin.style.opacity = 1
 
       input.style.display = 'none'
       let chances = Math.floor(Math.random() * 100)
-      // console.log(chances);
+
       let pressedBtnId = parseInt(btn.classList[1].slice(3, 4));
       btnsApple.style.bottom = `${btnPosition}px`;
       btnPosition += 80;
+
+      coefficientsStep++
+
       let classesToCheck = [`item${currentPos}`, `item${currentPos + 1}`, `item${currentPos + 2}`, `item${currentPos + 3}`];
       currentPos -= 4;
+
+
       gridItem.forEach(item => {
         if (classesToCheck.some(className => item.classList.contains(className))) {
           // win
-          if (chances > 50) {
+          if (chances > 10) {
             let newApplePng = document.createElement('img');
             newApplePng.src = '/png/apple.png';
             newApplePng.alt = '2';
@@ -77,22 +112,21 @@ btnApple.forEach(btn => {
             if (item.classList.contains(classesToCheck[pressedBtnId])) {
               item.appendChild(newApplePng);
             }
-            // lose
+
+            possibleWin.innerText = Math.floor(input.value * coefficients[coefficientsStep - 1])
+
+            if (currentPos < 20) {
+              take.style.display = 'block'
+            }
           } else {
+            // lose
             let newBadApplePng = document.createElement('img');
             newBadApplePng.src = '/png/bitten-apple.png';
             newBadApplePng.alt = '2';
   
             if (item.classList.contains(classesToCheck[pressedBtnId])) {
               item.appendChild(newBadApplePng);
-                modal.innerText = 'You lost'
-                modal.classList.add('is-active');
-                blurredBg.classList.add('is-active');
-                setTimeout(() => {
-                  modal.classList.remove('is-active');
-                  blurredBg.classList.remove('is-active');
-                  resetGame()
-              }, 3000);
+              handleModal('You lost')
           }
         }
       }});
@@ -113,4 +147,6 @@ input.addEventListener("input", function() {
 
 
 
-// take.addEventListener('click', )
+take.addEventListener('click', () => {
+  handleModal(`You won $${Math.floor(input.value * coefficients[coefficientsStep - 1])}`)
+})
