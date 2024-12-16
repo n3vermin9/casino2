@@ -33,9 +33,11 @@ btnRotate.addEventListener('click', (event) => {
         current -= 720
         wheel.style.transform = `rotate(${current}deg)`;
         current += 720
+
         balanceValue = localStorage.getItem('balance')
         localStorage.setItem('balance', parseInt(balanceValue) - parseInt(input.value));
         balance.innerText = localStorage.getItem('balance')
+        
         setTimeout(() => {
             modal.classList.add('is-active');
             blurredBg.classList.add('is-active');

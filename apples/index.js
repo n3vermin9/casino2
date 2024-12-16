@@ -13,8 +13,6 @@ const btnApple = document.querySelectorAll('.btn-apple')
 
 const gridItem = document.querySelectorAll('.grid-item')
 
-
-
 let balanceValue = localStorage.getItem('balance')
 
 window.onload = function() {
@@ -65,7 +63,7 @@ function handleModal(result) {
     blurredBg.classList.remove('is-active');
 
     resetGame()
-  }, 3000);
+  }, 1000);
 }
 
 
@@ -76,6 +74,10 @@ btnApple.forEach(btn => {
         btnApple.forEach(btnHide => {
           btnHide.style.display = 'none';
           handleModal(`You won $${input.value * coefficients[coefficientsStep]}`)
+
+          localStorage.setItem('balance', parseInt(balanceValue) + parseInt(input.value));
+          localStorage.setItem('balance', Math.floor(input.value * coefficients[coefficientsStep] + parseInt(balanceValue) - parseInt(input.value)));
+          balance.innerText = localStorage.getItem('balance')
         });
       }
 
@@ -90,6 +92,7 @@ btnApple.forEach(btn => {
 
       input.style.display = 'none'
       let chances = Math.floor(Math.random() * 100)
+      console.log(chances);
 
       let pressedBtnId = parseInt(btn.classList[1].slice(3, 4));
       btnsApple.style.bottom = `${btnPosition}px`;
@@ -104,10 +107,9 @@ btnApple.forEach(btn => {
       gridItem.forEach(item => {
         if (classesToCheck.some(className => item.classList.contains(className))) {
           // win
-          if (chances > 10) {
+          if (chances < 80) { // <- int - percent to win
             let newApplePng = document.createElement('img');
             newApplePng.src = '/png/apple.png';
-            newApplePng.alt = '2';
   
             if (item.classList.contains(classesToCheck[pressedBtnId])) {
               item.appendChild(newApplePng);
@@ -122,7 +124,6 @@ btnApple.forEach(btn => {
             // lose
             let newBadApplePng = document.createElement('img');
             newBadApplePng.src = '/png/bitten-apple.png';
-            newBadApplePng.alt = '2';
   
             if (item.classList.contains(classesToCheck[pressedBtnId])) {
               item.appendChild(newBadApplePng);
@@ -149,4 +150,8 @@ input.addEventListener("input", function() {
 
 take.addEventListener('click', () => {
   handleModal(`You won $${Math.floor(input.value * coefficients[coefficientsStep - 1])}`)
+
+  localStorage.setItem('balance', Math.floor(input.value * coefficients[coefficientsStep - 1] + parseInt(balanceValue) - parseInt(input.value)));
+  balance.innerText = localStorage.getItem('balance')
+
 })

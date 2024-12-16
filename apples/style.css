@@ -292,3 +292,33 @@ body {
   color: white;
   padding-right: 5px;
 }
+
+@media (max-width:481px)  {
+  .modal {
+    width: 240px;
+    height: 150px;
+  }
+  .grid-item::before {
+    color: white;
+    opacity: var(--before-opacity, .2);
+    position: absolute;
+    font-size: 10px;
+    left: -21px;
+  }
+}
+
+@media (min-width:961px)  {
+  .nav {
+    width: 70%;
+  }
+}
+@media (min-width:1025px) {
+  .nav {
+    width: 80%;
+  }
+}
+@media (min-width:1281px) {
+  .nav {
+    width: 90%;
+  }
+}

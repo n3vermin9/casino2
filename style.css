@@ -166,3 +166,19 @@ span {
   cursor: pointer;
   font-weight: 500;
 }
+
+@media (min-width:961px)  {
+  .nav {
+    width: 80%;
+  }
+}
+@media (min-width:1025px) {
+  .nav {
+    width: 80%;
+  }
+}
+@media (min-width:1281px) {
+  .nav {
+    width: 90%;
+  }
+}
